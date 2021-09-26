@@ -22,7 +22,7 @@ class Modula_Envira_Migrator {
 	 */
 	public function __construct() {
 
-		require_once MODULA_EVIRA_MIGRATOR_PATH . 'includes/class-modula-plugin-checker.php';
+		require_once MODULA_ENVIRA_MIGRATOR_PATH . 'includes/class-modula-plugin-checker.php';
 
 		if ( class_exists( 'Modula_Plugin_Checker' ) ) {
 
@@ -56,7 +56,7 @@ class Modula_Envira_Migrator {
 	/**
 	 * Returns the singleton instance of the class.
 	 *
-	 * @since 2.2.7
+	 * @since 1.0.0
 	 */
 	public static function get_instance() {
 
@@ -395,7 +395,7 @@ class Modula_Envira_Migrator {
 	 *
 	 * @param $gallery_id
 	 *
-	 * @since 2.2.7
+	 * @since 1.0.0
 	 */
 	public function clean_entries( $gallery_id ) {
 		global $wpdb;
@@ -476,6 +476,7 @@ class Modula_Envira_Migrator {
 	 * @param $data
 	 *
 	 * @return mixed
+	 * @since 1.0.0
 	 */
 	public function migrator_images( $images, $data ) {
 
@@ -486,6 +487,3 @@ class Modula_Envira_Migrator {
 	}
 
 }
-
-// Load the class.
-$modula_envira_migrator = Modula_Envira_Migrator::get_instance();
