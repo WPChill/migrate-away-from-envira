@@ -1,0 +1,7 @@
+node_modules/*
+.idea/*
+package-lock.json
+modula-envira-migrator.zip
+.standard.json
+.DS_Store
+.vscode/
