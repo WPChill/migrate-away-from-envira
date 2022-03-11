@@ -4,7 +4,7 @@
 	"version": "1.0.0",
 	"author": "Macho Themes",
 	"license": "GPL v3",
-	"repository": "https://github.com/machothemes/modula-lite.git",
+	"repository": "https://github.com/wpchill/modula-envira-migrator.git",
 	"scripts": {
 		"build": "webpack",
 		"watch": "webpack --watch",

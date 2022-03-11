@@ -51,7 +51,7 @@ module.exports = function( grunt ) {
 	                domainPath: 'languages/',         // Where to save the POT file.
 	                exclude: [],                      // List of files or directories to ignore.
 	                include: [],                      // List of files or directories to include.
-	                mainFile: 'Modula.php',                     // Main project file.
+	                mainFile: 'modula-envira-migrator.php',                     // Main project file.
 	                potComments: '',                  // The copyright at the beginning of the POT file.
 	                potFilename: 'modula-envira-migrator.pot',                  // Name of the POT file.
 	                potHeaders: {
@@ -70,16 +70,16 @@ module.exports = function( grunt ) {
 				files: [
 					{
 						expand: true,
-						cwd: 'assets/css/front',
+						cwd: 'assets/css/',
 						src: [ '*.css', '!*.min.css' ],
-						dest: 'assets/css/front',
+						dest: 'assets/css/',
 						ext: '.min.css'
 					}
 				]
 			}
 		},
 		clean: {
-			css: [ 'assets/css/front/*.min.css', '!assets/css/jquery-ui.min.css' ],
+			css: [ 'assets/css/*.min.css', '!assets/css/jquery-ui.min.css' ],
 			init: {
 				src: [ 'build/' ]
 			},
@@ -136,7 +136,7 @@ module.exports = function( grunt ) {
 			jsfiles: {
 				files: [ {
 					expand: true,
-					cwd   : 'assets/js/front/',
+					cwd   : 'assets/js/',
 					src   : [
 						'*.js',
 						'!*.min.js',
@@ -147,7 +147,7 @@ module.exports = function( grunt ) {
 						'!wp-modula.js',
 						'!resizesensor.js'
 					],
-					dest  : 'assets/js/front/',
+					dest  : 'assets/js/',
 					ext   : '.min.js'
 				} ]
 			}
@@ -177,7 +177,7 @@ module.exports = function( grunt ) {
 	] );
 	grunt.registerTask( 'minjs', [  // Minify CSS
 		'clean:jsmin',
-		'uglify',
+		'uglify'
 	] );
 	grunt.registerTask( 'mincss', [  // Minify CSS
 		'clean:css',
