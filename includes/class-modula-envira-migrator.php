@@ -157,8 +157,8 @@ class Modula_Envira_Migrator {
 		}
 
 		$imported_galleries = get_option( 'modula_importer' );
-		// If already migrated don't migrate
 
+		// If already migrated don't migrate
 		if ( isset( $imported_galleries['galleries']['envira'][ $gallery_id ] ) ) {
 
 			$modula_gallery = get_post_type( $imported_galleries['galleries']['envira'][ $gallery_id ] );
@@ -303,20 +303,18 @@ class Modula_Envira_Migrator {
 		// Attach meta modula-images to Modula CPT
 		update_post_meta( $modula_gallery_id, 'modula-images', $modula_images );
 
-		$envira_shortcodes     = '[envira-gallery id="' . $gallery_id . '"]';
+		$envira_shortcodes     = '[envira-gallery id="' . absint( $gallery_id ) . '"]';
 		$envira_slug           = get_post_field( 'post_name', $gallery_id );
-		$envira_slug_shortcode = '[envira-gallery slug="' . $envira_slug . '"]';
-		$modula_shortcode      = '[modula id="' . $modula_gallery_id . '"]';
+		$envira_slug_shortcode = '[envira-gallery slug="' . sanitize_title( $envira_slug ) . '"]';
+		$modula_shortcode      = '[modula id="' . absint( $modula_gallery_id ) . '"]';
 
 		// Replace Envira id shortcode with Modula Shortcode in Posts, Pages and CPTs
-		$sql = $wpdb->prepare( "UPDATE " . $wpdb->prefix . "posts SET post_content = REPLACE(post_content, '%s', '%s')",
-			$envira_shortcodes, $modula_shortcode );
-		$wpdb->query( $sql );
+		$wpdb->query( $wpdb->prepare( "UPDATE " . $wpdb->prefix . "posts SET post_content = REPLACE(post_content, %s, %s)",
+		$envira_shortcodes, $modula_shortcode ) );
 
 		// Replace Envira slug shortcode with Modula Shortcode in Posts, Pages and CPTs
-		$sql = $wpdb->prepare( "UPDATE " . $wpdb->prefix . "posts SET post_content = REPLACE(post_content, '%s', '%s')",
-			$envira_slug_shortcode, $modula_shortcode );
-		$wpdb->query( $sql );
+		$wpdb->query( $wpdb->prepare( "UPDATE " . $wpdb->prefix . "posts SET post_content = REPLACE(post_content, %s, %s)",
+		$envira_slug_shortcode, $modula_shortcode ) );
 
 		// Trigger delete function if option is set to delete
 		if ( isset( $_POST['clean'] ) && 'delete' == $_POST['clean'] ) {
@@ -336,7 +334,7 @@ class Modula_Envira_Migrator {
 
 		check_ajax_referer( 'modula-importer', 'nonce' );
 
-		$galleries = $_POST['galleries'];
+		$galleries = array_map( 'absint', wp_unslash( $_POST['galleries'] ) );
 
 		$importer_settings = get_option( 'modula_importer' );
 
@@ -366,7 +364,7 @@ class Modula_Envira_Migrator {
 			$url = admin_url( 'edit.php?post_type=modula-gallery&page=modula&modula-tab=importer&migration=complete&delete=complete' );
 		}
 
-		echo $url;
+		echo esc_url( $url );
 		wp_die();
 	}
 
@@ -386,7 +384,7 @@ class Modula_Envira_Migrator {
 			'success'           => (bool) $success,
 			'message'           => (string) $message,
 			'modula_gallery_id' => $gallery_id
-		), JSON_THROW_ON_ERROR );
+		) );
 		die;
 	}
 
@@ -399,10 +397,9 @@ class Modula_Envira_Migrator {
 	 */
 	public function clean_entries( $gallery_id ) {
 		global $wpdb;
-		$sql      = $wpdb->prepare( "DELETE FROM  $wpdb->posts WHERE ID = $gallery_id" );
-		$sql_meta = $wpdb->prepare( "DELETE FROM  $wpdb->postmeta WHERE post_id = $gallery_id" );
-		$wpdb->query( $sql );
-		$wpdb->query( $sql_meta );
+
+		$wpdb->query( $wpdb->prepare( "DELETE FROM  {$wpdb->posts} WHERE ID = %d", absint( $gallery_id ) ) );
+		$wpdb->query( $wpdb->prepare( "DELETE FROM  {$wpdb->postmeta} WHERE post_id = %d", absint( $gallery_id ) ) );
 	}
 
 	/**
