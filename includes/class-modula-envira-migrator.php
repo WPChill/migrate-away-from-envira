@@ -222,7 +222,7 @@ class Modula_Envira_Migrator {
 		$last_row_align = 'justify';
 		$grid_type      = 'automatic';
 
-		if ( 'hide' != $envira_settings['config']['justified_last_row'] ) {
+		if ( isset( $envira_settings['config']['justified_last_row'] ) &&  'hide' != $envira_settings['config']['justified_last_row']  ) {
 			$last_row_align = $envira_settings['config']['justified_last_row'];
 		}
 
