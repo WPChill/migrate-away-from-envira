@@ -334,6 +334,9 @@ class Modula_Envira_Migrator {
 
 		check_ajax_referer( 'modula-importer', 'nonce' );
 
+		if ( ! isset( $_POST['galleries'] ) ) {
+			wp_send_json_error();
+		}
 		$galleries = array_map( 'absint', wp_unslash( $_POST['galleries'] ) );
 
 		$importer_settings = get_option( 'modula_importer' );
