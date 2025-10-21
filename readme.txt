@@ -2,7 +2,7 @@
 Contributors: wpchill, silkalns
 Tags: envira gallery migrator, migrate to Modula, gallery migrator, migrate from envira gallery
 Requires at least: 5.2
-Tested up to: 6.6
+Tested up to: 6.8
 Requires PHP: 5.6
 Stable tag: 1.0.0
 License: GNU General Public License v3.0 or later
@@ -104,6 +104,11 @@ The simplest way to install is to click on \'Plugins\' then \'Add\' and type \'M
 3. Copy the \"modula-envira-migrator\" folder into the /wp-content/plugins directory of your WordPress installation.
 4. Login to your website and go to the Plugins section of your admin panel.
 5. Look for \"Modula Envira Migrator\" and click Activate.
+
+== Frequently Asked Questions ==
+= Where do I report security bugs found in this plugin? =
+
+Please report security bugs found in the source code of the Migrate away from Envira Gallery plugin through the [Patchstack Vulnerability Disclosure  Program](https://patchstack.com/database/vdp/e1afb82c-7bc9-41d4-a26d-b05fa044b85b). The Patchstack team will assist you with verification, CVE assignment, and notify the developers of this plugin."
 
 == Changelog ==
 
