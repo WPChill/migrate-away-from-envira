@@ -453,7 +453,11 @@ class Modula_Envira_Migrator {
 	 */
 	public function add_gallery_info( $g_gallery, $gallery, $import_settings ) {
 
-		$modula_gallery = get_post_type( $import_settings['galleries']['envira'][ $gallery->ID ] );
+		$modula_gallery = false;
+		if( isset( $import_settings['galleries']['envira'][ $gallery->ID ] ) ) {
+			$modula_gallery = get_post_type( $import_settings['galleries']['envira'][ $gallery->ID ] );
+		}
+
 		$imported       = false;
 
 		if ( isset( $import_settings['galleries']['envira'] ) && 'modula-gallery' === $modula_gallery ) {
